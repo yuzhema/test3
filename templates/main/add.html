@@ -1,0 +1,115 @@
+<style>
+	.table1{
+		border-color: lightgray;
+	}
+	.td1,.td2{
+		height: 36px;
+	}
+	.td1{
+		text-align: right;
+		padding-right: 5px;
+		background-color: rgb(230,242,254);
+		font-size: 14px;
+	}
+	.td2{
+		padding-left: 5px;
+	}
+    .inp{
+        width:60px;
+        height:30px;
+        font-size:15px;
+        line-height:30px;
+        float:right;
+        margin-right:90px;
+        margin-top:50px;
+
+    }
+</style>
+<form id="ff" action='{% url "govern:add:logic" %}' method="post" enctype="multipart/form-data">
+{% csrf_token %}
+<table class="table1" border="1" cellspacing="0" width="1110px">
+	<tr>
+		<td class="td1">商品名称:</td>
+		<td class="td2"><input type="text" name="name"/></td>
+	</tr>
+	<tr>
+		<td class="td1">作者:</td>
+		<td class="td2"><input type="text" name="author"/></td>
+	</tr>
+	<tr>
+		<td class="td1">出版社:</td>
+		<td class="td2"><input type="text" name="print_house"/></td>
+	</tr>
+    <tr>
+		<td class="td1">当当价:</td>
+		<td class="td2"><input type="text" name="dang_price"/></td>
+	</tr>
+    <tr>
+		<td class="td1">原价:</td>
+		<td class="td2"><input type="text" name="price"/></td>
+	</tr>
+	<tr>
+		<td class="td1">商品父类:</td>
+		<td class="td2">
+			<select name="parent_id">
+                {% for f in second %}
+                    <option value="{{ f.id }}">{{ f.child_category }}</option>
+                {% endfor %}
+
+
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td class="td1">出版日期:</td>
+		<td class="td2">
+			<input type="date" name="date" />
+		</td>
+	</tr>
+    <tr>
+		<td class="td1">封皮:</td>
+		<td class="td2">
+			<input type="file" name="file" />
+		</td>
+	</tr>
+
+</table>
+
+<input class="inp" type="button" value="提交"/>
+</form>
+
+<script src="/static/js/jquery.js"></script>
+<script>
+    $(".inp").click(function () {
+        var name=$("input:eq(1)").val()
+        var author=$("input:eq(2)").val()
+        var print_house=$("input:eq(3)").val()
+        var parent_id=$("select>option:selected").val()
+        var dang_price=$("input:eq(4)").val()
+        var price=$("input:eq(5)").val()
+        var date=$("input:eq(6)").val()
+        var file=$("input:eq(7)").val()
+        console.log(file)
+        console.log($("input"))
+        if(name && author && print_house && date && file && dang_price &&price){
+{#            console.log(111111111)#}
+            $("#ff").submit()
+        }else{
+            alert('不能有空项！')
+        }
+
+    })
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
